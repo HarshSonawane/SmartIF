@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> eFarming | Smart Water Management And Intelligent Farming  </title>
+    <meta property="og:title" content="Dashboard">
+    <meta name="author" content="Beni Arisandi">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Responsive admin theme build on top of Bootstrap 4">
+    <meta property="og:description" content="Responsive admin theme build on top of Bootstrap 4">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+    <meta property="og:site_name" content="Looper - Bootstrap 4 Admin Theme">
+    
+    <!-- FAVICONS -->
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/apple-touch-icon.png">
+    <link rel="shortcut icon" href="assets/favicon.ico">
+    <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/flatpickr/flatpickr.min.css' %}"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/theme.min.css' %}" data-skin="default">
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/theme-dark.min.css' %}" data-skin="dark">
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/custom.css' %}">
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      // Disable unused skin immediately
+      disabledSkinStylesheet.setAttribute('rel', '');
+      disabledSkinStylesheet.setAttribute('disabled', true);
+      // add flag class to html immediately
+      if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+    </script><!-- END THEME STYLES -->
+  </head>
+  <body>
+    
+    {% block content %}
+    {% endblock %}
+    {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+        <!-- .page-message -->
+    <div class="page-message" role="">
+      <i class="fa fa-fw fa-wrench"></i>{{ error }}  <a href="#" class="btn btn-sm btn-icon btn-warning ml-1" aria-label="Close" onclick="$(this).parent().fadeOut()"><span aria-hidden="true"><i class="fa fa-times"></i></span></a>
+    </div><!-- /.page-message -->
+    <!-- .page-inner -->
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+      <!-- .page-message -->
+    <div class="page-message" role="alert">
+      <i class="fa fa-fw fa-wrench"></i>{{ error }}  <a href="#" class="btn btn-sm btn-icon btn-warning ml-1" aria-label="Close" onclick="$(this).parent().fadeOut()"><span aria-hidden="true"><i class="fa fa-times"></i></span></a>
+    </div><!-- /.page-message -->
+    <!-- .page-inner -->
+    {% endfor %}
+    {% endif %}
+    {% if messages %}
+        {% for message in messages %}
+        <!-- .page-message -->
+    <div class="page-message" role="alert">
+        {{ message}}  <a href="#" class="btn btn-sm btn-icon btn-warning ml-1" aria-label="Close" onclick="$(this).parent().fadeOut()"><span aria-hidden="true"><i class="fa fa-times"></i></span></a>
+    </div><!-- /.page-message -->
+    <!-- .page-inner -->
+        {% endfor %}
+      {% endif %}
+
+    <!-- BEGIN BASE JS -->
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="{% static 'assets/vendor/pace/pace.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/flatpickr/flatpickr.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/easy-pie-chart/jquery.easypiechart.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/chart.js/Chart.min.js' %}"></script> <!-- END PLUGINS JS -->
+    <!-- BEGIN THEME JS -->
+    <script src="{% static 'assets/javascript/theme.min.js' %}"></script> <!-- END THEME JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="{% static 'assets/javascript/pages/dashboard-demo.js' %}"></script> <!-- END PAGE LEVEL JS -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag()
+      {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-116692175-1');
+    </script>
+      <!-- Start of ChatBot (www.chatbot.com) code -->
+<script type="text/javascript">
+  window._be = window._be || {};
+  window.__be.id = "5e48f3b81103520007f587e1";
+  (function() {
+      var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+      be.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.chatbot.com/widget/plugin.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+  })();
+</script>
+<!-- End of ChatBot code -->
+  </body>
+
+</html>

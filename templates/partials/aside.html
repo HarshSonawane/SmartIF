@@ -1,0 +1,134 @@
+{% load static %}
+<!-- .app-aside -->
+<aside class="app-aside app-aside-expand-md app-aside-light">
+    <!-- .aside-content -->
+    <div class="aside-content">
+      <!-- .aside-header -->
+      <header class="aside-header d-block d-md-none">
+        <!-- .btn-account -->
+        <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside"><span class="user-avatar user-avatar-lg"><img src="assets/images/avatars/profile.jpg" alt=""></span> <span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span> <span class="account-summary"><span class="account-name">{{ user.first_name }} {{ user.last_name }}</span> <span class="account-description">{{ user.profile.get_type_display }}</span></span></button> <!-- /.btn-account -->
+        <!-- .dropdown-aside -->
+        <div id="dropdown-aside" class="dropdown-aside collapse">
+          <!-- dropdown-items -->
+          <div class="pb-3">
+            <a class="dropdown-item" href="{% url 'profile' %}"><span class="dropdown-icon oi oi-person"></span> Profile</a> <a class="dropdown-item" href="{% url 'account_logout' %}"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+            <div class="dropdown-divider"></div><a class="dropdown-item" href="#">Help Center</a> <a class="dropdown-item" href="#">Ask Forum</a>
+          </div><!-- /dropdown-items -->
+        </div><!-- /.dropdown-aside -->
+      </header><!-- /.aside-header -->
+      <!-- .aside-menu -->
+      <div class="aside-menu overflow-hidden">
+        <!-- .stacked-menu -->
+        <nav id="stacked-menu" class="stacked-menu">
+          <!-- .menu -->
+          <ul class="menu">
+            <!-- .menu-item -->
+            <li class="menu-item has-active">
+              <a href="{% url 'user_home' %}" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Dashboard</span></a>
+            </li><!-- /.menu-item -->
+            <!-- .menu-item -->
+            <li class="menu-item has-child">
+              <a href="#" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">Farm Management</span> <span class="badge badge-warning">New</span></a> <!-- child menu -->
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="{% url 'add_farm' %}" class="menu-link">Add Farm</a>
+                </li>
+                <li class="menu-item">
+                  <a href="{% url 'add_plot' %}" class="menu-link">Add Plot</a>
+                </li>
+                <li class="menu-item">
+                    <a href="{% url 'add_ploting' %}" class="menu-link">Add Plotting</a>
+                  </li>
+                  
+              </ul><!-- /child menu -->
+            </li><!-- /.menu-item -->
+            <!-- .menu-item -->
+            <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">Water Management</span> <span class="badge badge-warning">New</span></a> <!-- child menu -->
+                <ul class="menu">
+                  <li class="menu-item">
+                    <a href="{% url 'add_water_resource' %}" class="menu-link">Add Water Resource</a>
+                  </li>
+                 
+                </ul><!-- /child menu -->
+              </li><!-- /.menu-item -->
+            <!-- .menu-item -->
+            <li class="menu-item has-child">
+              <a href="#" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span class="menu-text">Upload Images</span></a> <!-- child menu -->
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="#" class="menu-link">Coming Soon</a>
+                </li>
+              </ul><!-- /child menu -->
+            </li><!-- /.menu-item -->
+            <!-- .menu-item -->
+            <li class="menu-item has-child">
+              <a href="#" class="menu-link"><span class="menu-icon oi oi-person"></span> <span class="menu-text">User</span></a> <!-- child menu -->
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="{% url 'profile' %}" class="menu-link">Profile</a>
+                </li>
+                <li class="menu-item">
+                  <a href="{% url 'add_address' %}" class="menu-link">Add Address</a>
+                </li>
+                <li class="menu-item">
+                  <a href="{% url 'account_change_password' %}" class="menu-link">Change Password</a>
+                </li>
+                {% if user.profile.type == 1 %}
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Become Biologist</a>
+                  </li>
+                {% endif %}
+                
+                
+              </ul><!-- /child menu -->
+            </li><!-- /.menu-item -->
+            <!-- .menu-item -->
+            <li class="menu-item has-child">
+              <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span class="menu-text">Knowledge Base</span> <span class="badge badge-subtle badge-success">+3</span></a> <!-- child menu -->
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="#" class="menu-link">Crops Info</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Soil Info</a>
+                  </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Market Info</a>
+                  </li>
+              </ul><!-- /child menu -->
+            </li><!-- /.menu-item -->
+            <!-- .menu-item -->
+            <li class="menu-item">
+              <a href="{% url 'landing' %}" class="menu-link"><span class="menu-icon fas fa-rocket"></span> <span class="menu-text">Home</span></a>
+            </li><!-- /.menu-item -->
+            <!-- .menu-header -->
+            <li class="menu-header">Help Center </li><!-- /.menu-header -->
+            <!-- .menu-item -->
+            <li class="menu-item has-child">
+              <a href="#" class="menu-link"><span class="menu-icon oi oi-puzzle-piece"></span> <span class="menu-text">Contact</span></a> <!-- child menu -->
+              <ul class="menu">
+                <li class="menu-item">
+                  <a href="#" class="menu-link">mail@mail.com</a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="menu-link">00000000000</a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">Chat Now</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#" class="menu-link">Twitter</a>
+                  </li>
+              </ul><!-- /child menu -->
+            </li><!-- /.menu-item -->
+            
+          </ul><!-- /.menu -->
+        </nav><!-- /.stacked-menu -->
+      </div><!-- /.aside-menu -->
+      <!-- Skin changer -->
+      <footer class="aside-footer border-top p-2">
+        <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
+      </footer><!-- /Skin changer -->
+    </div><!-- /.aside-content -->
+  </aside><!-- /.app-aside -->

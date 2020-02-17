@@ -1,0 +1,190 @@
+{% extends 'site/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'partials/header.html' %}
+{% include 'partials/aside.html' %}
+  <!-- .app-main -->
+  <main class="app-main">
+    <!-- .wrapper -->
+    <div class="wrapper">
+      <!-- .page -->
+      <div class="page">
+        <!-- .page-inner -->
+        <div class="page-inner">
+          <!-- .page-title-bar -->
+          <header class="page-title-bar">
+            <div class="d-flex flex-column flex-md-row">
+              <p class="lead">
+                <span class="font-weight-bold">Hi, {{ user.first_name }} {{ user.last_name }}.</span> <span class="d-block text-muted"> {{ cord }} Here’s what’s happening with your farm today.</span>
+              </p>
+              <div class="ml-auto" hidden="hidden">
+                <!-- .dropdown -->
+                <div class="dropdown">
+                  <button class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>This Week</span> <i class="fa fa-fw fa-caret-down"></i></button> <!-- .dropdown-menu -->
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-md stop-propagation">
+                    <div class="dropdown-arrow"></div><!-- .custom-control -->
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="dpToday" name="dpFilter" data-start="2019/03/27" data-end="2019/03/27"> <label class="custom-control-label d-flex justify-content-between" for="dpToday"><span>Today</span> <span class="text-muted">Mar 27</span></label>
+                    </div><!-- /.custom-control -->
+                    <!-- .custom-control -->
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="dpYesterday" name="dpFilter" data-start="2019/03/26" data-end="2019/03/26"> <label class="custom-control-label d-flex justify-content-between" for="dpYesterday"><span>Yesterday</span> <span class="text-muted">Mar 26</span></label>
+                    </div><!-- /.custom-control -->
+                    <!-- .custom-control -->
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="dpWeek" name="dpFilter" data-start="2019/03/21" data-end="2019/03/27" checked> <label class="custom-control-label d-flex justify-content-between" for="dpWeek"><span>This Week</span> <span class="text-muted">Mar 21-27</span></label>
+                    </div><!-- /.custom-control -->
+                    <!-- .custom-control -->
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="dpMonth" name="dpFilter" data-start="2019/03/01" data-end="2019/03/27"> <label class="custom-control-label d-flex justify-content-between" for="dpMonth"><span>This Month</span> <span class="text-muted">Mar 1-31</span></label>
+                    </div><!-- /.custom-control -->
+                    <!-- .custom-control -->
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="dpYear" name="dpFilter" data-start="2019/01/01" data-end="2019/12/31"> <label class="custom-control-label d-flex justify-content-between" for="dpYear"><span>This Year</span> <span class="text-muted">2019</span></label>
+                    </div><!-- /.custom-control -->
+                    <!-- .custom-control -->
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" id="dpCustom" name="dpFilter" data-start="2019/03/27" data-end="2019/03/27"> <label class="custom-control-label" for="dpCustom">Custom</label>
+                      <div class="custom-control-hint my-1">
+                        <!-- datepicker:range -->
+                        <input type="text" class="form-control" id="dpCustomInput" data-toggle="flatpickr" data-mode="range" data-disable-mobile="true" data-date-format="Y-m-d"> <!-- /datepicker:range -->
+                      </div>
+                    </div><!-- /.custom-control -->
+                  </div><!-- /.dropdown-menu -->
+                </div><!-- /.dropdown -->
+              </div>
+            </div>
+          </header><!-- /.page-title-bar -->
+
+
+          <!-- .page-inner -->
+          <div class="page-inner">
+            <!-- .page-section -->
+            <div class="page-section">
+              <!-- .card -->
+              <div class="card card-fluid">
+                <!-- .card-body -->
+                <div class="card-body">
+                  <!-- .form-group -->
+                  <div class="form-group" hidden="hidden">
+                    <!-- .input-group -->
+                    <div class="input-group input-group-alt">
+                      <!-- .input-group-prepend -->
+                      <div class="input-group-prepend">
+                        <select id="filterBy" class="custom-select">
+                          <option value='' selected> Filter By </option>
+                          <option value="1"> Line </option>
+                          <option value="2"> Village </option>
+                          <option value="3"> City </option>
+                          <option value="4"> District </option>
+                          <option value="5"> State </option>
+                        </select>
+                      </div><!-- /.input-group-prepend -->
+                      <!-- .input-group -->
+                      <div class="input-group has-clearable">
+                        <button id="clear-search" type="button" class="close" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle"></i></span></button>
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                        </div><input id="table-search" type="text" class="form-control" placeholder="Search products">
+                      </div><!-- /.input-group -->
+                    </div><!-- /.input-group -->
+                  </div><!-- /.form-group -->
+                  <!-- .table -->
+                  <table id="myTable" class="table">
+                    <!-- thead -->
+                    <thead>
+                      <tr>
+                        <th colspan="2" style="min-width: 320px;">
+                          Details
+                        </th>
+                        <th> Farm </th>
+                        <th> Area </th>
+                        
+                        <th style="width:100px; min-width:100px;"> &nbsp; </th>
+                      </tr>
+                    </thead><!-- /thead -->
+                    <!-- tbody -->
+                    <tbody>
+                      <!-- create empty row to passing html validator -->
+                      {% for obj in objects %}
+                      <tr>
+                        
+                        <td></td>
+                        <td>{{ obj }}</td>
+                        <td>{{ obj.farm }}</td>
+                        <td>{{ obj.get_area_display }}</td>
+                        
+                      </tr>
+                      {% endfor %}
+                    </tbody><!-- /tbody -->
+                  </table><!-- /.table -->
+                </div><!-- /.card-body -->
+              </div><!-- /.card -->
+              <hr class="my-5">
+              
+            </div><!-- /.page-section -->
+          </div><!-- /.page-inner -->
+
+          <div class="page-inner">
+            
+            <!-- .page-section -->
+            <div class="page-section">
+              <!-- grid row -->
+              <div class="row">
+                <!-- grid column -->
+                <div class="col-lg-10">
+                  <!-- .card -->
+                  <div class="card card-fluid">
+                    <h6 class="card-header"> Add Plot </h6><!-- .card-body -->
+                    <div class="card-body">
+                      <!-- form -->
+                      <form method="POST" action="{% url 'add_plot' %}">{% csrf_token %}
+                        <!-- form row -->
+                        <div class="form-row">
+                          <!-- form column -->
+                          <div class="col-md-6 mb-3">
+                            <label for="input01">Farm</label> {{ form.farm }}
+                          </div><!-- /form column -->
+                          <!-- form column -->
+                          <div class="col-md-6 mb-3">
+                            <label for="input02">Area</label> {{ form.area }}
+                          </div><!-- /form column -->
+                        </div><!-- /form row -->
+                     
+                        <hr>
+                        <!-- .form-actions -->
+                        <div class="form-actions">
+                          <!-- enable submit btn when user type their current password -->
+                          <button type="submit" class="btn btn-primary text-nowrap ml-auto">Add Plot</button>
+                        </div><!-- /.form-actions -->
+                      </form><!-- /form -->
+                    </div><!-- /.card-body -->
+                  </div><!-- /.card -->
+                </div><!-- /grid column -->
+              </div><!-- /grid row -->
+            </div><!-- /.page-section -->
+          </div><!-- /.page-inner -->
+
+        </div><!-- /.page-inner -->
+      </div><!-- /.page -->
+    </div><!-- .app-footer -->
+    <footer class="app-footer">
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a class="text-muted" href="#">Support</a>
+        </li>
+        <li class="list-inline-item">
+          <a class="text-muted" href="#">Help Center</a>
+        </li>
+        <li class="list-inline-item">
+          <a class="text-muted" href="#">Privacy</a>
+        </li>
+        <li class="list-inline-item">
+          <a class="text-muted" href="#">Terms of Service</a>
+        </li>
+      </ul>
+      <div class="copyright"> Copyright © 2020. All right reserved. </div>
+    </footer><!-- /.app-footer -->
+    <!-- /.wrapper -->
+  </main><!-- /.app-main -->
+{% endblock %}

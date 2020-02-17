@@ -16,5 +16,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['url', 'username', 'email', 'first_name', 'last_name']
 
-    
-    #type = serializer.IntegerField(source='profile.type')
+
+class FarmsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'

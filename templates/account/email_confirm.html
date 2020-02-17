@@ -1,0 +1,86 @@
+{% extends 'account/base.html' %}
+{% load account %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="login-form qa-primary-login-form sheet--padding">
+      <div class="header">
+        
+  
+        <div class="header__text-group text-center">
+          
+          <p class="header__subheading"><img src="{% static 'site/icon.png' %}" width="150" height="150"></p>
+          <h1 class="header__heading">Confirm Email Address </h1>
+          <p>We have sent you an e-mail. Please contact us if you do not receive it within a few minutes.</p>
+        </div> <!-- close .text-group -->
+      </div> <!-- close .header -->
+  
+      <div class="row">
+        <div class="col-sm-8 col-md-6 center-block">
+           
+  
+  <div class="form-separator">
+    
+  </div>
+  {% if confirmation %}
+                    {% user_display confirmation.email_address.user as user_display %}
+                    <!-- Preheading -->
+              <h4 class="text-uppercase text-muted mb-4">
+                    {% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}
+                </h4>
+                <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
+                        {% csrf_token %}
+                            <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" tabindex="3" type="submit">{% trans 'Confirm' %}</button>
+                        </form>
+
+                        {% else %}
+
+                        {% url 'account_email' as email_url %}
+
+                        <h4 class="text-uppercase text-muted mb-4">
+                                {% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}
+                            </h4>
+
+                        {% endif %}
+  
+  
+    
+    <div class="form-group">
+        <a href="{% url 'account_login' %}"><button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" tabindex="3">
+            Back to login
+          </button></a>
+          
+      
+    </div> <!-- close .form-group -->
+  
+
+  
+        </div> <!-- close .col -->
+      </div> <!-- close .row -->
+    </div> <!-- close .login-form -->
+  </div> <!-- close .container -->
+  
+
+
+{% endblock %}
+
+
+{% block extra_body %}
+<script type="text/javascript">
+(function() {
+  var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
+  var actions = document.getElementsByName('action_remove');
+  if (actions.length) {
+    actions[0].addEventListener("click", function(e) {
+      if (! confirm(message)) {
+        e.preventDefault();
+      }
+    });
+  }
+})();
+</script>
+{% endblock %}

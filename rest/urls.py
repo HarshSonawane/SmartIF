@@ -4,6 +4,7 @@ from rest import views
 
 router = routers.DefaultRouter()
 router.register('users', views.UserViewSet)
+router.register('farms', views.FarmsViewSet)
 
 
 

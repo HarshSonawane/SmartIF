@@ -1,0 +1,58 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<div class="container">
+    <div class="login-form qa-primary-login-form sheet--padding">
+      <div class="header">
+        
+  
+          <h1 class="header__heading">Update Profile image of {{ user.email }}</h1>
+          <hr style="border: solid 1px black" >
+
+        <div class="header__text-group text-center"></div>
+        <p class="header__subheading" style="margin-left: 30%;">
+          <img id="file" src="{% if user.profile.profile_image %}{{ user.profile.profile_image.url }}{% else %}{% static 'icons/user.png' %}{% endif %}" style="border: 1px solid black;border-radius: 50%;" width="150" height="150">
+        </p>
+        </div> <!-- close .text-group -->
+      </div> <!-- close .header -->
+  
+      <div class="row">
+        <div class="col-sm-8 col-md-6 center-block">
+            
+         
+  
+  <div class="form-separator">
+  </div>
+  
+  <form action="{% url 'profile_change_image' %}"  enctype="multipart/form-data" method="POST">{% csrf_token %}
+  
+    <div class="form-group">
+      <label> Profile Picture</label>
+            {{ image_form.profile_image }}
+          </div> <!-- close .form-group -->
+          
+
+      <div class="form-group">
+            <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" tabindex="3">
+               Proceed
+              </button>
+          
+        </div> <!-- close .form-group -->
+        
+      </form>
+      <div class="form-group">
+            <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" onclick="history.back()" tabindex="3">
+                Back
+              </button>
+          
+        </div> <!-- close .form-group -->
+      
+            </div> <!-- close .col -->
+          </div> <!-- close .row -->
+        </div> <!-- close .login-form -->
+      </div> <!-- close .container -->
+      
+    {% endblock %}

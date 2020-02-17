@@ -1,0 +1,43 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<main class="auth">
+  <header id="auth-header" class="auth-header" style="background-image: url(assets/images/illustration/img-1.png);">
+    <h1>
+      e<span>Farming</span>
+      <span class="sr-only">Complete Profile</span>
+    </h1>
+    <p>Updating {{ user.email }}'s info</p>
+    </p>
+  </header><!-- form -->
+  <form class="auth-form" action="{% url 'profile' %}" method="POST">{% csrf_token %}
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        {{ name_form.first_name }}<label for="inputUser">First Name</label>
+      </div>
+    </div><!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        {{ name_form.last_name }}<label for="inputPassword">Last Name</label>
+      </div>
+    </div><!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <div class="form-label-group">
+        {{ mobile_form.mobile }}<label for="inputPassword">Mobile</label>
+      </div>
+    </div><!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+    </div><!-- /.form-group -->
+  </form><!-- /.auth-form -->
+  <!-- copyright -->
+  <footer class="auth-footer"> © 2020 All Rights Reserved. <a href="#">Privacy</a> and <a href="#">Terms</a>
+  </footer>
+</main><!-- /.auth -->
+{% endblock %}

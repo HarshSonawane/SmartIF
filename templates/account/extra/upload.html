@@ -1,0 +1,98 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <div class="login-form qa-primary-login-form sheet--padding">
+      <div class="header">
+        
+  
+        <div class="header__text-group text-center"></div>
+          <h1 class="header__heading">Add POST </h1>
+        </div> <!-- close .text-group -->
+      </div> <!-- close .header -->
+  
+      <div class="row">
+        <div class="col-sm-8 col-md-6 center-block">
+            
+         
+  
+  <div class="form-separator">
+  </div>
+  
+  <form action="{% url 'upload' %}"  enctype="multipart/form-data" method="POST">{% csrf_token %}
+  
+    <div class="form-group">
+          {{ form.title }}
+    </div> <!-- close .form-group -->
+    <img id="file" src="#" alt="Preview" style="max-height: 500px;" width="100%"></p>
+    <div class="form-group">
+        <label>Post File(Meme)</label>
+      {{ form.file }}
+    </div> <!-- close .form-group -->
+    
+    <div class="form-group">
+      <label>Template File</label>
+        {{ form.template }}
+      </div> <!-- close .form-group -->
+  
+    <div class="form-group">
+      {{ form.category }}
+    </div> <!-- close .form-group -->
+    
+
+
+    <div class="form-group" hidden>
+      {{ form.is_sponsored }} Sponsored
+    </div> <!-- close .form-group -->
+  
+    
+    <div class="form-group">
+        <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" tabindex="3">
+            Add POST
+          </button>
+      
+    </div> <!-- close .form-group -->
+    
+  </form>
+  <div class="form-group">
+        <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" onclick="history.back()" tabindex="3">
+            Back
+          </button>
+      
+    </div> <!-- close .form-group -->
+  
+        </div> <!-- close .col -->
+      </div> <!-- close .row -->
+    </div> <!-- close .login-form -->
+  </div> <!-- close .container -->
+  
+{% endblock %}
+
+
+
+
+
+
+
+
+<!--
+  <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<div class="file-upload">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+    <div class="drag-text">
+      <h3>Drag and drop a file or select add Image</h3>
+    </div>
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+      <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+    </div>
+  </div>
+</div>
+-->

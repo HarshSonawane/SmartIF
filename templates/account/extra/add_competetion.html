@@ -1,0 +1,72 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <div class="login-form qa-primary-login-form sheet--padding">
+      <div class="header">
+        
+  
+        <div class="header__text-group text-center"></div>
+          <h1 class="header__heading">Add POST for {{ competetion.title }} </h1>
+        </div> <!-- close .text-group -->
+      </div> <!-- close .header -->
+  
+      <div class="row">
+        <div class="col-sm-8 col-md-6 center-block">
+            
+         
+  
+  <div class="form-separator">
+  </div>
+  
+  <form action="{% url 'add_competetion' competetion.id %}"  enctype="multipart/form-data" method="POST">{% csrf_token %}
+  
+    <div class="form-group">
+          {{ form.title }}
+    </div> <!-- close .form-group -->
+    <img id="file" src="#" alt="Preview" style="max-height: 500px;" width="100%"></p>
+    <label>Competition File</label>
+    <div class="form-group">
+      {{ form.file }}
+    </div> <!-- close .form-group -->
+    
+    <label>Meme Template File</label>
+    <div class="form-group">
+      {{ form.template }}
+    </div> <!-- close .form-group -->
+
+    <!--
+      <label>Select the valid competition category</label>
+    <div class="form-group">
+      {{ form.category }}
+    </div> 
+    -->
+    <!-- close .form-group -->
+    
+
+    
+    <div class="form-group">
+        <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" tabindex="3">
+            Add POST
+          </button>
+      
+    </div> <!-- close .form-group -->
+    
+  </form>
+  <div class="form-group">
+        <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" onclick="history.back()" tabindex="3">
+            Back
+          </button>
+      
+    </div> <!-- close .form-group -->
+  
+        </div> <!-- close .col -->
+      </div> <!-- close .row -->
+    </div> <!-- close .login-form -->
+  </div> <!-- close .container -->
+  
+{% endblock %}
+
+

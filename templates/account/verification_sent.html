@@ -1,0 +1,53 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load account %}
+{% block content %}
+
+<div class="container">
+    <div class="login-form qa-primary-login-form sheet--padding">
+      <div class="header">
+        
+  
+        <div class="header__text-group text-center">
+          
+          <p class="header__subheading"><img src="{% static 'site/icon.png' %}" width="150" height="150"></p>
+          <h1 class="header__heading">Verification Email Sent </h1>
+          <p>We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.</p>
+        </div> <!-- close .text-group -->
+      </div> <!-- close .header -->
+  
+      <div class="row">
+        <div class="col-sm-8 col-md-6 center-block">
+           
+  
+  <div class="form-separator">
+    
+  </div>
+  
+  
+    
+    <div class="form-group">
+        <a href="{% url 'account_login' %}"><button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" tabindex="3">
+            Back to login
+          </button></a>
+
+          <!-- Link -->
+          <div class="text-center">
+              <small class="text-muted text-center">
+                    Please contact us if you have any trouble in account confirmation.
+              </small>
+            </div>
+          
+      
+    </div> <!-- close .form-group -->
+  
+
+  
+        </div> <!-- close .col -->
+      </div> <!-- close .row -->
+    </div> <!-- close .login-form -->
+  </div> <!-- close .container -->
+  
+
+    {% endblock %}

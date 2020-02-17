@@ -1,0 +1,113 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="login-form qa-primary-login-form sheet--padding">
+      <div class="header">
+        
+  
+        <div class="header__text-group text-center">
+          
+          <p class="header__subheading"><img src="{% static 'site/icon.png' %}" width="150" height="150"></p>
+          <h1 class="header__heading">Emails </h1>
+          <p>We have sent you an e-mail. Please contact us if you do not receive it within a few minutes.</p>
+        </div> <!-- close .text-group -->
+      </div> <!-- close .header -->
+  
+      <div class="row">
+        <div class="col-sm-8 col-md-6 center-block">
+           
+  <div class="form-separator">
+  </div>
+
+  <form method="post" action="{% url 'account_email' %}" class="add_email">
+      {% csrf_token %}
+      <!-- Email address -->
+<div class="form-group">
+<!-- Input -->
+<input type="email" class="form-control" name="email" placeholder="name@address.com"  style="border: 0;
+outline: 0;
+background: transparent;
+border-bottom: 1px solid black;">
+</div>
+<button name="action_add" class="btn btn-default btn-block-level" style="background-color: #8DC7B8" type="submit">Add email</button>
+</form>
+
+<p></p>
+  {% if user.emailaddress_set.all %}
+
+
+  <form action="{% url 'account_email' %}" class="email_list" method="post">
+  {% csrf_token %}
+  <fieldset class="blockLabels">
+
+    {% for emailaddress in user.emailaddress_set.all %}
+  <div class="ctrlHolder">
+        <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
+
+        <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
+
+  {{ emailaddress.email }}
+      {% if emailaddress.verified %}
+      <span class="verified">{% trans "Verified" %}</span>
+      {% else %}
+      <span class="unverified">{% trans "Unverified" %}</span>
+      {% endif %}
+        {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
+  </label>
+  </div>
+    {% endfor %}
+
+  <div class="buttonHolder"></div>
+        <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" type="submit" name="action_prima-ry" >{% trans 'Make Primary' %}</button>
+        <p></p>
+        <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+        <p></p>
+        <button class="btn btn-default btn-block-level" style="background-color: #8DC7B8" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
+  </div>
+
+  </fieldset>
+  </form>
+
+  {% else %}
+</p>
+  <!-- Preheading -->
+<h6 class="text-uppercase text-muted mb-4">
+  You currently do not have any e-mail address set up. You should really add an e-mail address so you can receive notifications, reset your password, etc.
+</h6>
+  {% endif %}
+
+ 
+    
+    
+  
+
+  
+        </div> <!-- close .col -->
+      </div> <!-- close .row -->
+    </div> <!-- close .login-form -->
+  </div> <!-- close .container -->
+
+
+{% endblock %}
+
+
+{% block extra_body %}
+<script type="text/javascript">
+(function() {
+  var message = "{% trans 'Do you really want to remove the selected e-mail address?' %}";
+  var actions = document.getElementsByName('action_remove');
+  if (actions.length) {
+    actions[0].addEventListener("click", function(e) {
+      if (! confirm(message)) {
+        e.preventDefault();
+      }
+    });
+  }
+})();
+</script>
+{% endblock %}

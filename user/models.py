@@ -36,7 +36,7 @@ class Address(models.Model):
     updated         = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.line_1 + self.city
+        return self.line_1 + ' - ' + self.city
 
 class Profile(models.Model):
     MALE = 1
@@ -51,15 +51,16 @@ class Profile(models.Model):
     FARMER = 1
     DOCTOR = 2
     SHOP = 3
-    GENDER_CHOICES = (
+    TYPE_CHOICES = (
         (FARMER, 'Farmer'),
         (DOCTOR, 'Doctor'),
         (SHOP , 'Shop'),
     )
      
     user            = models.OneToOneField(User, on_delete=models.CASCADE)
+    mobile          = models.IntegerField()
     profile_image   = models.ImageField(upload_to='profile/%y/%m/%d/', blank=True)
-    type            = models.PositiveSmallIntegerField(choices=GENDER_CHOICES, null=True, blank=True)
+    type            = models.PositiveSmallIntegerField(choices=TYPE_CHOICES, default=1)
     status          = models.BooleanField(default=False)
     created_on      = models.DateTimeField(auto_now_add=True)
     updated_on      = models.DateTimeField(auto_now=True)
@@ -75,3 +76,30 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     instance.profile.save()
 
+
+
+class Applications(models.Model):
+    APPLIED = 1
+    PROCESSING = 2
+    APPROVED = 3
+    STATUS_CHOICES = (
+        (APPLIED, 'Applied'),
+        (PROCESSING, 'Processing'),
+        (APPROVED , 'Approved'),
+    )
+
+    BIOLOGIST = 1
+    SHOP = 2
+    APPLIED_CHOICES = (
+        (BIOLOGIST, 'Biologist'),
+        (SHOP, 'Shop'),
+    )
+
+    user            = models.ForeignKey(User, on_delete=models.CASCADE)
+    applied_for     = models.PositiveSmallIntegerField(choices=APPLIED_CHOICES, default=1)
+    status          = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=1)
+    created         = models.DateTimeField(auto_now_add=True)
+    updated         = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.user) + ' is applying for ' + str(self.applied_for)
