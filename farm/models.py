@@ -99,6 +99,7 @@ class Reports(models.Model):
     added_by        = models.ForeignKey(User, on_delete=models.CASCADE)
     ploting         = models.ForeignKey(Ploting, on_delete=models.CASCADE)
     file            = models.ImageField(upload_to=upload_file_path)
+    remark          = models.CharField(max_length=255, null=True, blank=True)
     created         = models.DateTimeField(auto_now_add=True)
     updated         = models.DateTimeField(auto_now=True)
 

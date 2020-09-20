@@ -58,7 +58,7 @@ class Profile(models.Model):
     )
      
     user            = models.OneToOneField(User, on_delete=models.CASCADE)
-    mobile          = models.IntegerField()
+    mobile          = models.IntegerField(null=True, blank=True)
     profile_image   = models.ImageField(upload_to='profile/%y/%m/%d/', blank=True)
     type            = models.PositiveSmallIntegerField(choices=TYPE_CHOICES, default=1)
     status          = models.BooleanField(default=False)

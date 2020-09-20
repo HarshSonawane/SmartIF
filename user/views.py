@@ -5,7 +5,7 @@ from django.contrib import messages
 import requests
 from . import service
 from user.models import Address, Applications
-from farm.models import Farm, Soil, WaterResource, Plots, Ploting
+from farm.models import Farm, Soil, WaterResource, Plots, Ploting, Reports
 from django.shortcuts import get_object_or_404
 
 
@@ -196,7 +196,9 @@ def add_ploting(request):
 def planting_details(request, id=None):
     template = 'site/dashboard/ploting_details.html'
     ploting = get_object_or_404(Ploting, id=id)
+    reports = Reports.objects.filter(ploting=ploting)
     context = {
+        'reports': reports,
         'ploting':ploting,
     }
 

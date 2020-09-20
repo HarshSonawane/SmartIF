@@ -10,162 +10,119 @@
         <!-- .page -->
         <div class="page has-sidebar has-sidebar-expand-xl">
           <!-- .page-inner -->
-          <div class="page-inner">
-            <!-- .page-title-bar -->
-            <header class="page-title-bar">
-              <!-- .breadcrumb -->
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item active">
-                    <a href="{% url 'add_ploting' %}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Plotings</a>
-                  </li>
-                </ol>
-              </nav><!-- /.breadcrumb -->
-              <div class="d-md-flex">
-                <h1 class="page-title"> {{ ploting.crop }} </h1>
-                <div class="ml-auto">
-                  <button type="button" class="btn btn-primary">Add Images</button>
+          <div class="page-inner page-inner-fill">
+            <!-- .message -->
+            <div class="message">
+              <!-- message header -->
+              <div class="message-header">
+                <div class="d-flex">
+                  <a class="btn btn-light btn-icon" href="{% url 'add_ploting' %}"><i class="fa fa-flip-horizontal fa-share"></i></a>
                 </div>
-              </div>
-            </header><!-- /.page-title-bar -->
-            <!-- .page-section -->
-            <div class="page-section">
-              <!-- .section-block -->
-              <div class="section-block">
-                <!-- .invoice-wrapper -->
-                <div class="invoice-wrapper">
-                  <!-- .invoice-actions -->
-                  <div class="invoice-actions">
-                    <div class="dropdown">
-                      <button type="button" class="btn btn-lg btn-secondary rounded-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-caret-down"></span></button>
-                      <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-arrow mr-1"></div><button type="button" id="download-pdf" class="dropdown-item">Download PDF</button> <button type="button" class="dropdown-item">Share...</button>
-                        <div class="dropdown-divider"></div><button type="button" class="dropdown-item">Mark as paid</button>
+                <h4 class="message-title"> {{ ploting }}</h4>
+                <div class="message-header-actions">
+                  <!-- invite members -->
+                  <div class="dropdown d-inline-block">
+                    <button type="button" class="btn btn-light btn-icon" title="Invite members" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-plus"></i></button> <!-- .dropdown-menu -->
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-rich stop-propagation">
+                      <div class="dropdown-arrow"></div>
+                      <div class="dropdown-header"> Add members </div>
+                      <div class="form-group px-3 py-2 m-0">
+                        <input type="text" class="form-control" placeholder="e.g. @bent10" data-toggle="tribute" data-remote="assets/data/tribute.json" data-menu-container="#people-list" data-item-template="true" data-autofocus="true"> <small class="form-text text-muted">Search people by username or email address to invite them.</small>
                       </div>
+                      <div id="people-list" class="tribute-inline stop-propagation"></div><a href="#" class="dropdown-footer">Invite member by link <i class="far fa-clone"></i></a>
+                    </div><!-- /.dropdown-menu -->
+                  </div><!-- /invite members -->
+                  <button type="button" class="btn btn-light btn-icon d-xl-none" data-toggle="sidebar"><i class="fa fa-angle-double-left"></i></button>
+                </div>
+              </div><!-- /message header -->
+              <!-- message body -->
+              <div class="message-body">
+                <!-- .card -->
+                <div class="card card-fluid mb-0">
+                  <!-- .conversations -->
+                  <div role="log" class="conversations">
+                    <!-- .conversation-list -->
+                    <ul class="conversation-list">
+                      <!-- .conversation-divider -->
+                      <li class="log-divider">
+                        <span><i class="far fa-fw fa-comment-alt"></i> plotted on <strong></strong> · {{ ploting.created }}</span>
+                      </li><!-- /.conversation-divider -->
+                      
+                      {% for r in reports %}
+                      <!-- .conversation-inbound -->
+                      <li class="conversation-outbound conversation-faux">
+                        <div class="conversation-message conversation-message-skip-avatar">
+                          <div class="conversation-message-text has-attachment">
+                            <div class="pswp-gallery">
+                              <!-- .card-figure -->
+                              <div class="card card-figure">
+                                <!-- .card-figure -->
+                                <figure class="figure">
+                                  <!-- .figure-img -->
+                                  <div class="figure-img figure-attachment">
+                                    <img src="{{ r.file.url }}" alt="Card image cap"> <a href="{{ r.file.url }}" class="img-link" data-size="600x450"><span class="tile tile-circle bg-danger"><span class="oi oi-eye"></span></span> <span class="img-caption d-none">Card image cap</span></a>
+                                  </div><!-- /.figure-img -->
+                                  <figcaption class="figure-caption">
+                                    <ul class="list-inline d-flex text-muted mb-0">
+                                      <li class="list-inline-item text-truncate mr-auto">{{ r.ploting.crop }} </li>
+                                      <li class="list-inline-item">
+                                        <button type="button" class="btn btn-reset" title="Download"><span class="oi oi-data-transfer-download"></span></button>
+                                      </li>
+                                    </ul>
+                                  </figcaption>
+                                </figure><!-- /.card-figure -->
+                              </div><!-- /.card-figure -->
+                            </div>
+                          </div>
+                          <div class="conversation-meta"> {{ user.username }} · {{ r.created }} </div>
+                        </div>
+                        <div class="conversation-actions dropdown">
+                          <button class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-h"></i></button>
+                          <div class="dropdown-menu">
+                            <div class="dropdown-arrow ml-n1"></div><button type="button" class="dropdown-item">Copy text</button> <button type="button" class="dropdown-item">Edit</button> <button type="button" class="dropdown-item">Reply</button> <button type="button" class="dropdown-item">Remove</button>
+                          </div>
+                        </div>
+                      </li><!-- /.conversation-inbound -->
+                      {% endfor %}
+                      
+                      
+                      <!-- .conversation-inbound -->
+                      <li class="conversation-inbound">
+                        <div class="conversation-avatar">
+                          <a href="#" class="user-avatar"><img src="assets/images/avatars/uifaces11.jpg" alt=""> <span class="avatar-badge online"></span></a>
+                        </div>
+                        <div class="conversation-message">
+                          <div class="conversation-message-text">
+                            <div class="typing mr-1">
+                              <span class="dot"></span> <span class="dot"></span> <span class="dot"></span>
+                            </div><em>system is processing your inputs</em>
+                          </div>
+                        </div>
+                      </li><!-- /.conversation-inbound -->
+                    </ul><!-- /.conversation-list -->
+                  </div><!-- /.conversations -->
+                  
+                </div><!-- /.card -->
+              </div><!-- /message body -->
+              <!-- message publisher -->
+              <div class="message-publisher">
+                <!-- form -->
+                <form>
+                  <!-- .media -->
+                  <div class="media mb-1">
+                    <div class="btn btn-light btn-icon fileinput-button">
+                      <i class="fa fa-paperclip"></i> <input type="file" id="pm-attachment" name="pmAttachment[]" multiple>
                     </div>
-                  </div><!-- /.invoice-actions -->
-                  <!-- .invoice -->
-                  <div id="invoice" class="invoice" data-id="INV-65D9E592">
-                    <!-- .invoice-header -->
-                    <div class="invoice-header">
-                      <!-- grid row -->
-                      <div class="row">
-                        <!-- .col -->
-                        <div class="col d-flex">
-                          <h2 class="invoice-brand align-self-center">
-                            <img src="assets/images/brand-logo.png" width="124" alt=""> <span class="sr-only">Invoice Brand</span>
-                          </h2>
-                        </div><!-- /.col -->
-                        <!-- .col -->
-                        <div class="col">
-                          <table class="table table-borderless table-sm">
-                            <tbody>
-                              <tr>
-                                <td colspan="2">
-                                  <small>Amount (USD)</small>
-                                  <h5> $3.096,00 </h5>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <small>Invoice No</small><br>
-                                  <h5> INV-65D9E592 </h5>
-                                </td>
-                                <td>
-                                  <small>Due Date</small><br>
-                                  <h5> Jan 18, 2019 </h5>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div><!-- /.col -->
-                      </div><!-- /grid row -->
-                    </div><!-- /.invoice-header -->
-                    <!-- .invoice-body -->
-                    <div class="invoice-body">
-                      <!-- grid row -->
-                      <div class="row">
-                        <!-- .col -->
-                        <div class="col">
-                          <!-- .invoice-sender -->
-                          <div class="invoice-sender">
-                            <dl>
-                              <dt> From: </dt>
-                              <dd> Stilearning </dd>
-                              <dd> 983 Kunde Glens, Pourosmouth<br> AK 68019-8335 </dd>
-                            </dl>
-                          </div><!-- /.invoice-recipient -->
-                        </div><!-- /.col -->
-                        <!-- .col -->
-                        <div class="col">
-                          <!-- .invoice-recipient -->
-                          <div class="invoice-recipient">
-                            <dl>
-                              <dt> Billed To: </dt>
-                              <dd> Ron-tech </dd>
-                              <dd> 3272 Mills Valleys Suite 412, Port Willis<br> NV 69859 </dd>
-                            </dl>
-                          </div><!-- /.invoice-recipient -->
-                        </div><!-- /.col -->
-                      </div><!-- /grid row -->
-                      <table class="table table-sm">
-                        <caption class="invoice-title">
-                          <span>Invoice</span><br>
-                          <span class="text-primary">Looper Admin Theme Custom Design</span>
-                        </caption>
-                        <thead>
-                          <tr>
-                            <th style="min-width: 375px"> Description </th>
-                            <th class="text-right"> Qty </th>
-                            <th> Price </th>
-                            <th class="text-right"> Amount (USD) </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td> Create mobile app </td>
-                            <td class="text-right"> 1 </td>
-                            <td> $3.000,00 </td>
-                            <td class="text-right"> $3.000,00 </td>
-                          </tr>
-                          <tr>
-                            <td> Looper Admin Theme (Standard License) </td>
-                            <td class="text-right"> 4 </td>
-                            <td> $49,00 </td>
-                            <td class="text-right"> $196,00 </td>
-                          </tr><!-- fake border -->
-                          <tr>
-                            <td colspan="4"></td>
-                          </tr>
-                        </tbody>
-                        <tfoot class="table-borderless">
-                          <tr>
-                            <th colspan="2"></th>
-                            <th> Total </th>
-                            <th class="text-right"> $3.196,00 </th>
-                          </tr>
-                          <tr>
-                            <th colspan="2"></th>
-                            <th> Coupon </th>
-                            <th class="text-right"> $100,00 </th>
-                          </tr>
-                          <tr>
-                            <th colspan="2"></th>
-                            <th> Due </th>
-                            <th class="text-right"> $3.096,00 </th>
-                          </tr>
-                        </tfoot>
-                      </table>
-                    </div><!-- /.invoice-body -->
-                    <!-- .invoice-footer -->
-                    <div class="invoice-footer">
-                      <p>
-                        <strong>Thanks for buying or notes</strong>. Please click button with caret down icon above to generate and download this invoice in pdf format. </p>
-                    </div><!-- /.invoice-footer -->
-                  </div><!-- /.invoice -->
-                </div><!-- /.invoice-wrapper -->
-              </div><!-- /.section-block -->
-            </div><!-- /.page-section -->
+                    <div class="media-body">
+                      <input type="text" class="form-control border-0 shadow-none" name="messageText" placeholder="Type a message">
+                    </div>
+                    <div>
+                      <button type="button" class="btn btn-light btn-icon"><i class="far fa-smile"></i></button> <button type="submit" class="btn btn-light btn-icon"><i class="far fa-paper-plane"></i></button>
+                    </div>
+                  </div><!-- /.media -->
+                </form><!-- /form -->
+              </div><!-- /message publisher -->
+            </div><!-- /.message -->
           </div><!-- /.page-inner -->
           <!-- .page-sidebar -->
           <div class="page-sidebar">

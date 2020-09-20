@@ -27,17 +27,21 @@
               <a href="{% url 'user_home' %}" class="menu-link"><span class="menu-icon fas fa-home"></span> <span class="menu-text">Dashboard</span></a>
             </li><!-- /.menu-item -->
             <!-- .menu-item -->
+            <li class="menu-item has-active">
+              <a href="{% url 'upload_image' %}" class="menu-link"><span class="menu-icon fas fa-search"></span> <span class="menu-text">Add Report</span></a>
+            </li><!-- /.menu-item -->
+            <!-- .menu-item -->
             <li class="menu-item has-child">
               <a href="#" class="menu-link"><span class="menu-icon far fa-file"></span> <span class="menu-text">Farm Management</span> <span class="badge badge-warning">New</span></a> <!-- child menu -->
               <ul class="menu">
                 <li class="menu-item">
-                  <a href="{% url 'add_farm' %}" class="menu-link">Add Farm</a>
+                  <a href="{% url 'add_farm' %}" class="menu-link">Farm</a>
                 </li>
                 <li class="menu-item">
-                  <a href="{% url 'add_plot' %}" class="menu-link">Add Plot</a>
+                  <a href="{% url 'add_plot' %}" class="menu-link">Plot</a>
                 </li>
                 <li class="menu-item">
-                    <a href="{% url 'add_ploting' %}" class="menu-link">Add Plotting</a>
+                    <a href="{% url 'add_ploting' %}" class="menu-link">Plotting</a>
                   </li>
                   
               </ul><!-- /child menu -->
